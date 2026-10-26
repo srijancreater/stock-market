@@ -26,12 +26,12 @@ HTML_TEMPLATE = """
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); color: #1e293b; min-height: 100vh; }
-        .glass { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.4); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07); }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .gradient-text { background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .status-pill { padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
         .bullish { background: #dcfce7; color: #166534; }
         .bearish { background: #fee2e2; color: #991b1b; }
-        .loader { border-top-color: #2563eb; animation: spinner 1.5s linear infinite; }
+        .loader { border-top-color: #2563eb; animation: spinner 1s linear infinite; }
         @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
@@ -98,7 +98,7 @@ HTML_TEMPLATE = """
                     <div class="space-y-4">
                         <div class="flex justify-between text-sm"><span class="text-slate-500">Trading Mode:</span><span class="text-slate-800 font-semibold">Autonomous Quant</span></div>
                         <div class="flex justify-between text-sm"><span class="text-slate-500">Stop Loss:</span><span class="text-red-600 font-semibold">Fixed -2.0%</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-slate-500">Trailing Stop:</span><span class="text-green-600 font-semibold">Active (1.5% Trail)</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-slate-500">Trailing Stop:</span><span class="text-green-600 font-semibold">Active (1.5% Trail</span></div>
                     </div>
                     <div class="bg-white/60 p-4 rounded-2xl border border-slate-200">
                         <p class="text-xs text-slate-500 mb-2 uppercase font-bold">Execution Log</p>
