@@ -13,7 +13,9 @@ from agents.execution.risk_manager import RiskManager
 
 app = FastAPI()
 
-@app.get("/api/analyze")
+# On Vercel, the file api/analyze.py is automatically served at /api/analyze
+# We use "/" here because the file name itself defines the route.
+@app.get("/")
 def analyze(ticker: str = Query(..., description="Stock ticker to analyze")):
     ticker = ticker.upper()
     
@@ -44,7 +46,3 @@ def analyze(ticker: str = Query(..., description="Stock ticker to analyze")):
         "technical": result.get("technical_signal"),
         "prediction": result.get("predicted_move")
     }
-
-@app.get("/")
-def home():
-    return {"message": "Stock AI Swarm API is live! Use /api/analyze?ticker=AAPL"}
