@@ -2,3 +2,4 @@ fastapi
 yfinance
 pandas
 uvicorn
+v2
