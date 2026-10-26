@@ -20,66 +20,21 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Trading Swarm | Neumorphic Edition</title>
+    <title>AI Trading Swarm | V4.0 Neumorphic</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
-        :root {
-            --bg-color: #e0e5ec;
-            --shadow-light: #ffffff;
-            --shadow-dark: #a3b1c6;
-            --accent-blue: #3b82f6;
-        }
-
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-color); 
-            color: #4a5568; 
-            min-height: 100vh; 
-        }
-
-        .neu-flat {
-            background: var(--bg-color);
-            box-shadow: 9px 9px 16px var(--shadow-dark), 
-                        -9px -// a bit of a cut off here in the code I will fix it
-                        -9px 16px var(--shadow-light);
-            border-radius: 2rem;
-        }
-
-        .neu-inset {
-            background: var(--bg-color);
-            box-shadow: inset 6px 6px 12px var(--shadow-dark), 
-                        inset -6px -6px 12px var(--shadow-light);
-            border-radius: 1rem;
-        }
-
-        .neu-button {
-            background: var(--bg-color);
-            box-shadow: 6px 6px 12px var(--shadow-dark), 
-                        -6px -6px 12px var(--shadow-light);
-            transition: all 0.2s ease;
-            border-radius: 1rem;
-        }
-
-        .neu-button:active {
-            box-shadow: inset 4px 4px 8px var(--shadow-dark), 
-                        inset -4px -4px 8px var(--shadow-light);
-            transform: scale(0.98);
-        }
-
-        .gradient-text { 
-            background: linear-gradient(90deg, #1e40af, #6d28d9); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
-
+        body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #e0e5ec 0%, #c3cfd9 100%); color: #4a5568; min-height: 100vh; }
+        .neu-flat { background: #e0e5ec; box-shadow: 9px 9px 16px #a3b1c6, -9px -9px 16px #ffffff; border-radius: 2rem; }
+        .neu-inset { background: #e0e5ec; box-shadow: inset 6px 6px 12px #a3b1c6, inset -6px -6px 12px #ffffff; border-radius: 1rem; }
+        .neu-button { background: #e0e5ec; box-shadow: 6px 6px 12px #a3b1c6, -6px -6px 12px #ffffff; transition: all 0.2s ease; border-radius: 1rem; }
+        .neu-button:active { box-shadow: inset 4px 4px 8px #a3b1c6, inset -4px -4px 8px #ffffff; transform: scale(0.98); }
+        .gradient-text { background: linear-gradient(90deg, #2563eb, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .status-pill { padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
-        .bullish { background: #c6f6d5; color: #22543d; }
-        .bearish { background: #fed7d7; color: #822727; }
-        
-        .loader { border-top-color: var(--accent-blue); animation: spinner 1s linear infinite; }
+        .bullish { background: #dcfce7; color: #166534; }
+        .bearish { background: #fee2e2; color: #991b1b; }
+        .loader { border-top-color: #2563eb; animation: spinner 1s linear infinite; }
         @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
@@ -88,14 +43,13 @@ HTML_TEMPLATE = """
         <header class="flex justify-between items-center mb-12">
             <div class="text-left">
                 <h1 class="text-3xl font-bold gradient-text">AI TRADING SWARM</h1>
-                <p class="text-slate-500 text-sm">Neumorphic Intelligence Engine</p>
+                <p class="text-slate-500 text-sm">Neumorphic Intelligence Engine v4.0</p>
             </div>
-            <div class="neu-flat px-4 py-2 text-xs flex items-center gap-2 text-slate-600">
+            <div class="neu-flat px-4 py-2 rounded-full text-xs flex items-center gap-2 text-slate-600">
                 <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                 System Online: 10 Agents Active
             </div>
         </header>
-
         <div class="flex justify-center mb-12">
             <div class="relative w-full max-w-xl">
                 <input type="text" id="tickerInput" placeholder="Enter Ticker (e.g. AAPL, RELIANCE.NS)" 
@@ -107,12 +61,10 @@ HTML_TEMPLATE = """
                 </button>
             </div>
         </div>
-
         <div id="loading" class="hidden flex flex-col items-center justify-center py-20">
             <div class="loader w-12 h-12 border-4 border-slate-300 rounded-full mb-4"></div>
             <p class="text-slate-500 animate-pulse">Swarm Coordinating Agents...</p>
         </div>
-
         <div id="results" class="hidden space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="neu-flat p-6 flex flex-col items-center justify-center text-center">
@@ -128,7 +80,6 @@ HTML_TEMPLATE = """
                     <span id="resConf" class="text-4xl font-bold text-slate-800">0%</span>
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                 <div class="neu-flat p-4 rounded-2xl"><div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600"><i class="fa-solid fa-database"></i></div><span class="text-xs font-semibold text-slate-600">Data Miner</span></div><p id="agentData" class="text-sm text-slate-500">Fetching...</p></div>
                 <div class="neu-flat p-4 rounded-2xl"><div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600"><i class="fa-solid fa-face-smile"></i></div><span class="text-xs font-semibold text-slate-600">Sentiment</span></div><p id="agentSent" class="text-sm text-slate-500">Analyzing...</p></div>
@@ -150,7 +101,7 @@ HTML_TEMPLATE = """
                     <div class="space-y-4">
                         <div class="flex justify-between text-sm"><span class="text-slate-500">Trading Mode:</span><span class="text-slate-800 font-semibold">Autonomous Quant</span></div>
                         <div class="flex justify-between text-sm"><span class="text-slate-500">Stop Loss:</span><span class="text-red-600 font-semibold">Fixed -2.0%</span></div>
-                        <div class="flex justify-between text-sm"><span class="text-slate-500">Trailing Stop:</span><span class="text-green-600 font-semibold">Active (1.5% Trail)</span></div>
+                        <div class="flex justify-between text-sm"><span class="text-slate-500">Trailing Stop:</span><span class="text-green-600 font-semibold">Active (1.5% Trail</span></div>
                     </div>
                     <div class="neu-inset p-4 bg-white/50">
                         <p class="text-xs text-slate-500 mb-2 uppercase font-bold">Execution Log</p>
@@ -188,8 +139,7 @@ HTML_TEMPLATE = """
                 document.getElementById('agentAlgo').innerText = 'Signal: ' + data.decision;
                 document.getElementById('agentRisk').innerHTML = '<span class="status-pill bullish">' + data.risk_status + '</span>';
                 const log = document.getElementById('execLog');
-                log.innerHTML = '<div>> Order triggered for ' + ticker + '</div><div>> Entry Price: ' + data.price.toFixed(2) + '</div><div>> Trailing Stop set at ' + (data.price * 0.985).toFixed(2) + '</div><div>> Auto-Trading: EXECUTING ' + data.// a bit of a cut off here in the code I will fix it
-                log.innerHTML += ' ' + data.decision + '...</div>';
+                log.innerHTML = '<div>> Order triggered for ' + ticker + '</div><div>> Entry Price: ' + data.price.toFixed(2) + '</div><div>> Trailing Stop set at ' + (data.price * 0.985).toFixed(2) + '</div><div>> Auto-Trading: EXECUTING ' + data.decision + '...</div>';
                 document.getElementById('results').classList.remove('hidden');
             } catch (e) { alert("Error: " + e.message); } finally {
                 document.getElementById('loading').classList.add('hidden');
