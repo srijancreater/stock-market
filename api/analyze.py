@@ -13,9 +13,7 @@ from agents.execution.risk_manager import RiskManager
 
 app = FastAPI()
 
-# On Vercel, the file api/analyze.py is automatically served at /api/analyze
-# We use "/" here because the file name itself defines the route.
-@app.get("/")
+@app.get("/api/analyze")
 def analyze(ticker: str = Query(..., description="Stock ticker to analyze")):
     ticker = ticker.upper()
     
@@ -35,14 +33,24 @@ def analyze(ticker: str = Query(..., description="Stock ticker to analyze")):
     swarm = SwarmManager(agents)
     result = swarm.execute_pipeline(ticker)
     
+    # Explicitly calculating trailing stop loss for the UI
+    price = result.get("price", 0)
+    trailing_stop = price * 0.985 # 1.5% trail
+    
     return {
         "ticker": result.get("ticker"),
-        "price": result.get("price"),
+        "price": price,
         "decision": result.get("final_decision"),
         "confidence": result.get("prediction_confidence"),
         "risk_status": result.get("risk_status", "Passed"),
         "sentiment": result.get("sentiment"),
         "macro": result.get("macro_outlook"),
         "technical": result.get("technical_signal"),
-        "prediction": result.get("predicted_move")
+        "prediction": result.get("predicted_move"),
+        "trailing_stop": trailing_stop,
+        "algo_status": "Auto-Executing" if result.get("final_decision") != "HOLD" else "Monitoring"
     }
+
+@app.get("/")
+def home():
+    return {"message": "Stock AI Swarm API is live!"}
